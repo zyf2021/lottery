@@ -1,0 +1,4 @@
+{
+    "port": 5000,
+    "mongoUri": "mongodb+srv://user:password_12345@cluster0.ksvot.mongodb.net/db_lottery?retryWrites=true&w=majority"
+}
