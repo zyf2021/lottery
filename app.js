@@ -13,7 +13,10 @@ async function start(){
             useNewUrlParser:true,
             useUnifiedTopology:true,
             useCreateIndex:true
-        })
+        }).then(
+            ()=>{console.log('Database is connected')},
+            err => {console.log('Can not connect to the database'+ err)}
+        )
 
         app.listen(PORT, () => console.log(`App has been started on port ${PORT}...`))
     }

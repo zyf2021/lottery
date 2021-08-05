@@ -7,8 +7,8 @@ const schema = new Schema({
     phone:{type:String},
     //avatar:{type: Image},
     password:{type:String, required:true},
-    role:{type:String},
-    verification:{type:Boolean},
+    role:{type:String, default:"User"},
+    verification:{type:Boolean, default:false},
     tickets:[{type: Types.ObjectId, ref: 'Ticket'}],
     date_create:{type:Date}
 })
