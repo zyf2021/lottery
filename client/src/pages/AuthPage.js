@@ -1,13 +1,13 @@
 //import React from 'react'
 import React, {useEffect, useState, useContext} from 'react'
 import { useHistory } from 'react-router'
-//import { AuthContext } from '../context/AuthContext'
-//import { useHttp } from '../hooks/http.hook'
+import { AuthContext } from '../context/AuthContext'
+import { useHttp } from '../hooks/http.hooks'
 import { useMessage } from '../hooks/message.hook'
 
 export const AuthPage = () => {
     const history = useHistory()
-    //const auth = useContext(AuthContext)
+    const auth = useContext(AuthContext)
     const message = useMessage()
     const {loading, request, error, clearError} = useHttp()
     const [form, setForm] = useState({
@@ -30,11 +30,11 @@ export const AuthPage = () => {
     
     const loginHandler = async () => {
         try {
-            const data = await request ('/api/auth/login', 'POST', {...form})
+           const data = await request ('/api/auth/login', 'POST', {...form})
            // message(data.message)
-           console.log('Data', data.userId)
+           //console.log('Data', data.userId)
            auth.login(data.token, data.userId)
-           history.push(`/main/${data.userId}`)//типа перенаправление на страницу main/:id
+           history.push(`/create`)//типа перенаправление на страницу main/:id
         } catch (e) {}
     }
 
@@ -55,7 +55,7 @@ export const AuthPage = () => {
                                    class="validate" 
                                    name="email" 
                                    className="orange-input" 
-                                   //onChange = {changeHandler}
+                                   onChange = {changeHandler}
                                    />
                             <label for="email">Email</label>
                         </div>
@@ -65,7 +65,7 @@ export const AuthPage = () => {
                                    class="validate" 
                                    name = "password" 
                                    className="orange-input" 
-                                   //onChange = {changeHandler}
+                                   onChange = {changeHandler}
                                    />
                             <label for="password">Пароль</label>
                         </div>
@@ -74,8 +74,8 @@ export const AuthPage = () => {
                 <div className="card-action">
                     <button className="btn yellow darken-4" 
                             style = {{marginRight:10}}
-                            //onClick = {loginHandler}
-                            //disabled = {loading}
+                            onClick = {loginHandler}
+                            disabled = {loading}
                             >
                                 Вход
                     </button>

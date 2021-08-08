@@ -1,4 +1,6 @@
 {
-    "port": 5000,
-    "mongoUri": "mongodb+srv://user:password_12345@cluster0.ksvot.mongodb.net/db_lottery?retryWrites=true&w=majority"
+    "port":5000,
+    "mongoUri": "mongodb+srv://user:qwerty_12345@cluster0.ksvot.mongodb.net/db_lottery?retryWrites=true&w=majority",
+    "jwtSecret":"key practice Zyf",
+    "baseUrl" : "http://192.168.43.176:5000"
 }
