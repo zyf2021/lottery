@@ -26,20 +26,14 @@ export const CreatePage = () => {
     const changeHandler = event =>{
         setTicket({ ...ticket, [event.target.name]: event.target.value})
     }
-    const logoutHandler = event => {
-        event.preventDefault()
-        auth.logout()
-        history.push('/')
-      }
-
     const createHandler = async event => {//async?
         try {
-            const data = await request ('/api/ticket/create', 'POST', {...ticket}, {
+            const data = await request ('/api/tickets/create', 'POST', {...ticket}, {
                 Authorization: `Bearer ${auth.token}`
             })
-           // message(data.message)
+            message(data.message)
             console.log('Data', data)
-            //history.push(`/detail`)
+            //history.push(`/list`)
         } catch (e) {}
     }
     return (
@@ -96,13 +90,6 @@ export const CreatePage = () => {
                                 >
                             Создать билет
                     </button>
-                    <a className="btn amber lighten-1"
-                                href="/" 
-                                onClick={logoutHandler}
-                                
-                                >
-                            Выйти
-                    </a>
                 </div>
             </div>
         </div>
