@@ -6,6 +6,7 @@ import {TicketsPage} from './pages/TicketsPage'
 import {AuthPage} from './pages/AuthPage'
 import {RegisPage} from './pages/RegisPage'
 
+
 export const useRoutes = isAuthenticated => {
     if (isAuthenticated){
         return(
@@ -16,7 +17,7 @@ export const useRoutes = isAuthenticated => {
                 <Route path = "/create" exact>
                     <CreatePage />
                 </Route>
-                <Route path = "/profile/:id" exact>
+                <Route path = "/profile" exact>
                     <ProfilePage />
                 </Route>
                 <Redirect to ="/create"/>

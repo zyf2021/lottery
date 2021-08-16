@@ -19,8 +19,9 @@ export const Navbar = () => {
             <a href="!#" class="brand-logo center">Лотерея</a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
               <li><a href="/" onClick={logoutHandler}>Выйти</a></li>
+              <li><a href="/create">Создать</a></li>
               <li><a href="/tickets">Список билетов</a></li>
-              <li><a href="/profile">Список билетов</a></li>
+              <li><a href="/profile">Профиль</a></li>
             </ul>   
             </div>
         </nav>

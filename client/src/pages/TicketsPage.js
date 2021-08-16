@@ -13,7 +13,7 @@ export const TicketsPage = () => {
     const fetchTickets = useCallback(async () => {
             try {
                 const fetched = await request('api/tickets/', 'GET', null, {
-                    Athorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 })
                 setTickets(fetched)
             } catch (e) {}

@@ -18,6 +18,8 @@ export const TicketsList = ({ tickets }) => {
         <th>4</th>
         <th>5</th>
         <th>Дата создания</th>
+        <th>Дата оплаты</th>
+        <th>Статус</th>
         <th>Удалить</th>
       </tr>
       </thead>
@@ -34,6 +36,8 @@ export const TicketsList = ({ tickets }) => {
             <td>{ticket.ticket4}</td>
             <td>{ticket.ticket5}</td>
             <td>ДД/ММ/ГГГГ</td>
+            <td>ДД/ММ/ГГГГ</td>
+            <td>Не оплачен</td>
             <td>
             <Link to={`/`}>Удалить</Link>
             </td>

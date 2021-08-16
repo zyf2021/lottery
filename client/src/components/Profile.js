@@ -1,5 +1,5 @@
 import React from 'react'
-const bcrypt = require('bcryptjs')
+//const bcrypt = require('bcryptjs')
 
 export const Profile = ({ user }) => {
     return (
@@ -10,7 +10,7 @@ export const Profile = ({ user }) => {
               <span class="card-title">Профиль</span>
                 <>      
                 <p>ID: {user._id}</p>      
-                <p>Имя : {user.name} </p>
+                <p>Имя : {user.first_name} </p>
                 <p>Email : {user.email} </p>
                 <p>Телефон : {user.phone} </p>
                 <p>Дата создания : {user.date_create} </p>
