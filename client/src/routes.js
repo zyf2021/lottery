@@ -3,6 +3,7 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 import {ProfilePage} from './pages/ProfilePage'
 import {CreatePage} from './pages/CreatePage'
 import {TicketsPage} from './pages/TicketsPage'
+import {Activate} from './pages/Activate'
 import {AuthPage} from './pages/AuthPage'
 import {RegisPage} from './pages/RegisPage'
 
@@ -19,6 +20,9 @@ export const useRoutes = isAuthenticated => {
                 </Route>
                 <Route path = "/profile" exact>
                     <ProfilePage />
+                </Route>
+                <Route path = "/activate/activ_token" exact>
+                    <Activate />
                 </Route>
                 <Redirect to ="/create"/>
             </Switch>

@@ -23,13 +23,13 @@
   "homepage": "https://github.com/zyf2021/lottery#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-  
     "config": "^3.3.6",
     "express": "^4.17.1",
     "express-validator": "^6.12.1",
+    "googleapis": "^84.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.5"
-    
+    "mongoose": "^5.13.5",
+    "nodemailer": "^6.6.3"
   },
   "devDependencies": {
     "concurrently": "^6.2.0",
