@@ -2,10 +2,10 @@ import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {useHistory, useParams} from 'react-router-dom'
 import {AuthContext} from '../context/AuthContext'
 import {Loader} from '../components/Loader'
-import {Profile} from '../components/Profile'
+//import {Profile} from '../components/Profile'
 import { useHttp } from '../hooks/http.hooks'
 
-export const ProfilePage = () => {
+export const UserInfoPage = () => {
     const {token} = useContext(AuthContext)
     const {request, loading} = useHttp()
     const[user, setUser] = useState(null)
@@ -13,7 +13,7 @@ export const ProfilePage = () => {
 
     const getUser = useCallback(async() => {
         try {
-            const fetched = await request(`/api/user/profile`, 'GET', null, {
+            const fetched = await request(`/api/user/info`, 'GET', null, {
                 Authorization: `Bearer ${token}`
             })
             setUser(fetched)
@@ -33,7 +33,7 @@ export const ProfilePage = () => {
 
     return(   
             <>
-                { !loading && user && <Profile user={user} /> }
+                Информация об одном пользователе
             </>
     )
 }

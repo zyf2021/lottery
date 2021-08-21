@@ -6,6 +6,8 @@ import {TicketsPage} from './pages/TicketsPage'
 import {Activate} from './pages/Activate'
 import {AuthPage} from './pages/AuthPage'
 import {RegisPage} from './pages/RegisPage'
+import {UserInfoPage} from './pages/UserInfoPage'
+import {AllUsersInfoPage} from './pages/AllUserInfoPage'
 
 
 export const useRoutes = isAuthenticated => {
@@ -21,8 +23,11 @@ export const useRoutes = isAuthenticated => {
                 <Route path = "/profile" exact>
                     <ProfilePage />
                 </Route>
-                <Route path = "/activate/activ_token" exact>
-                    <Activate />
+                <Route path = "/info" exact>
+                    <UserInfoPage />
+                </Route>
+                <Route path = "/all_info" exact>
+                    <AllUsersInfoPage />
                 </Route>
                 <Redirect to ="/create"/>
             </Switch>

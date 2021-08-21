@@ -3,31 +3,28 @@ const router = Router()
 const User = require('../models/User')
 const sendMail = require('../controllers/sendMail')
 const userControllers = require('../controllers/userControllers')
-const {activation_token, access_token, refresh_token, baseUrl_3000} = require('config')
+const {activation_token, access_token, refresh_token, baseUrl_3000, jwtSecret} = require('config')
 
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const {check, validationResult} = require('express-validator')
 
-/*const createActivationToken = (payload) => {
-    //console.log(activation_token)
-
-   /// {userId: user.id}, config.get('jwtSecret'), {expiresIn:'1h'}
-    return jwt.sign({userId: user.id}, activation_token, {expiresIn: '5m'})
+const createActivationToken = (payload) => {
+    return jwt.sign(payload.toJSON(), activation_token, {expiresIn: '5m'})
 }
+/*
+    const createAccessToken = (payload) => {
+        return jwt.sign(payload, access_token, {expiresIn: '15m'})
+    }
 
-const createAccessToken = (payload) => {
-    return jwt.sign(payload, access_token, {expiresIn: '15m'})
-}
-
-const createRefreshToken = (payload) => {
-    return jwt.sign(payload, refresh_token, {expiresIn: '7d'})
-}*/
+    const createRefreshToken = (payload) => {
+        return jwt.sign(payload, refresh_token, {expiresIn: '7d'})
+    }
+*/
 
 
 // /api/auth/register
-router.post(
-    '/register',
+router.post('/register',
     [
         check('first_name', 'Введите имя').notEmpty(),
         check('last_name', 'Введите фамилию').notEmpty(),
@@ -36,7 +33,7 @@ router.post(
         check('password','Минимальная длина пароля 6 символов').isLength({min:6})
     ], 
     async (req, res) =>{
-        try{
+        //try{
             const errors = validationResult(req)
             if(!errors.isEmpty()){
                 return res.status(400).json({
@@ -53,25 +50,30 @@ router.post(
             const hashedPassword = await bcrypt.hash(password,12)
             const now = new Date()
             const user = new User({email, first_name, last_name, phone, password:hashedPassword, date_create:now})     
-            const url = `${baseUrl_3000}/user/activate/${activation_token}`
-            jwt.sign({userId: user.id}, activation_token, {expiresIn: '5m'}) //createActivationToken
+            
+            const token = createActivationToken(user)
+
+            console.log({token})
+            //jwt.sign({userId: user.id}, activation_token, {expiresIn: '5m'}) //createActivationToken
+            
+            const url = `${baseUrl_3000}/user/activate/${token}`
+
             sendMail(email, url, "Verify your email address")
             res.json({message: "Register Success! Please activate your email to start."})
             
             //Сохранение пользователя (в /activate)
             //await user.save()
             //res.status(201).json({message:'Пользователь создан'})
-        }catch(e){
+       /* }catch(e){
             res.status(500).json({message: "WARN"})
-        }  
+        } */ 
     }
 )
 // /api/auth/activation
 router.post('/activation', userControllers.activateEmail)
 
 // /api/auth/login
-router.post(
-    '/login', 
+router.post('/login', 
     [
         check('email', 'Некорртектный email').normalizeEmail().isEmail(),
         check('password','Введите пароль').exists()
@@ -79,7 +81,6 @@ router.post(
     async(req, res) =>{
         try{
             //console.log('Body:', req.body)
-            
             const errors = validationResult(req)
             if(!errors.isEmpty()){
                 return res.status(400).json({
@@ -88,6 +89,8 @@ router.post(
                 })
             }
             const{email,password} = req.body
+        
+        
             const user = await User.findOne({email})
 
             if(!user){
@@ -98,25 +101,22 @@ router.post(
             if (!isMatch){
                 return res.status(400).json({message:'Неверный пароль, попробуйте снова'})
             }
-
+       
             const token = jwt.sign(
                 {
                     userId: user.id
                 },
-                config.get('jwtSecret'),
+                jwtSecret,
                 {
                     expiresIn:'1h'
                 }
             )
-            res.json({token, userId:user.id}) //Responce
-
-
+            res.json({message:'Вход выполнен', token, userId:user.id}) //Responce 
+            
         }catch(e){
             res.status(500).json({message:'Что-то не так, попробуйте еще раз'})
         }
     })
 
-
-
-
+//logout?
 module.exports = router

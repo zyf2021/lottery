@@ -2,6 +2,7 @@
 const {Router} = require('express')
 //const config = require('config')
 const Ticket = require('../models/Ticket')
+const {ticketControllers} = require('../controllers/ticketControllers')
 const auth = require('../middleware/auth.middleware')
 const {check, validationResult} = require('express-validator')
 const router = Router()
@@ -41,15 +42,7 @@ router.post('/create',
 })
 
 ///api/tickets/
-router.get('/', auth, async(req, res) => {
-    try {
-        //console.log(req.user.userId)
-        const tickets = await Ticket.find({owner:req.user.userId})
-        res.json(tickets)        
-    } catch (e) {
-        res.status(500).json({message:'Ошибка'})
-    }
-})
+router.get('/', auth, ticketControllers.getUserTicket)
 
 
 
