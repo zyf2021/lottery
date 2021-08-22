@@ -2,7 +2,7 @@
 const {Router} = require('express')
 //const config = require('config')
 const Ticket = require('../models/Ticket')
-const {ticketControllers} = require('../controllers/ticketControllers')
+const ticketControllers = require('../controllers/ticketControllers')
 const auth = require('../middleware/auth.middleware')
 const {check, validationResult} = require('express-validator')
 const router = Router()
@@ -44,6 +44,8 @@ router.post('/create',
 ///api/tickets/
 router.get('/', auth, ticketControllers.getUserTicket)
 
+//api/tickets/delete/:id
+router.get('/delete/:id', auth, ticketControllers.deleteTicket)
 
 
 module.exports = router
