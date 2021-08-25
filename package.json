@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/zyf2021/lottery#readme",
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.4.1",
+    "@stripe/stripe-js": "^1.17.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.26.3",
     "config": "^3.3.6",
@@ -32,7 +34,8 @@
     "googleapis": "^84.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.5",
-    "nodemailer": "^6.6.3"
+    "nodemailer": "^6.6.3",
+    "stripe": "^8.170.0"
   },
   "devDependencies": {
     "concurrently": "^6.2.0",

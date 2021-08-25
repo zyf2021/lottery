@@ -14,7 +14,7 @@ router.get('/profile',  auth,
             res.json(req.user)
         }
         catch(e){
-            res.status(500).json({ message: 'Ошибка в роутах'})
+            res.status(500).json({ message: e.message})
         }
     }
 )

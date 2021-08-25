@@ -4,6 +4,14 @@ import { AuthContext } from '../context/AuthContext'
 import { useHistory } from 'react-router-dom'
 import { useMessage } from '../hooks/message.hook'
 
+
+import { loadStripe } from "@stripe/stripe-js"
+import { Elements } from "@stripe/react-stripe-js"
+import CheckoutForm from '../components/CheckoutForm'
+
+//const config = require('config')
+const promise = loadStripe('pk_test_51JSGYHDrIIHnRlXN02dfEZpRpPuwZmH6V11Xg8IZ4FMC6QbXnQ3WqXKpK7bgkXTtnW7zJPxsBkSreQT6XZHUw2pl00haIdWGvU')
+
 export const CreatePage = () => {
     const history = useHistory()
     const message = useMessage()
@@ -92,6 +100,12 @@ export const CreatePage = () => {
                     </button>
                 </div>
             </div>
+            <div className="col s8 offset-s2">
+                <Elements stripe={promise}>
+                    <CheckoutForm />
+                </Elements>
+            </div>
+
         </div>
     )
 }

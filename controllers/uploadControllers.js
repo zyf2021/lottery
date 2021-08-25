@@ -1,5 +1,6 @@
 const cloudinary = require('cloudinary')
 const fs = require('fs')
+const config = require('config')
 
 /*cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -7,10 +8,16 @@ const fs = require('fs')
     api_secret: process.env.CLOUD_API_SECRET
 })*/
 
+cloudinary.config({ 
+    cloud_name: config.cloud_name, 
+    api_key: config.api_key, 
+    api_secret: config.api_secret 
+  });
+
 const uploadControllers = {
     uploadAvatar: async (req, res) => {
         try {
-            /*const file = req.files.file
+            const file = req.files.file
             
             cloudinary.v2.uploader.upload(file.tempFilePath, {
                 folder: 'avatar', width: 150, height: 150, crop: "fill"
@@ -25,7 +32,7 @@ const uploadControllers = {
                     }))
                     
                 res.json({url: result.secure_url})
-            })*/
+            })
         
         } catch (e) {
             return res.status(500).json({message: e.message})

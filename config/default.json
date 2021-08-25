@@ -13,5 +13,13 @@
     "mailing_service_client_id": "1009485664193-3f6kop6699vvei3c96lfn0u5b40nrneg.apps.googleusercontent.com",
     "mailing_service_client_secret":"shcyO55Ch_LDv9WOdff4nFwT",
     "mailing_service_refresh_token":"1//04RBwR26BJ7u6CgYIARAAGAQSNwF-L9Ir_acP3YtsHbHCKZ5zfSj7q227Y-wTZZ8Ehzooe3zRe_Khv6BjdfdzF0vQ-okMWm5dLIE",
-    "sender_email_address":"tynshun@gmail.com"
+    "sender_email_address":"tynshun@gmail.com",
+
+    "cloud_name": "dtk7vdu4s", 
+    "api_key": "412274543671486", 
+    "api_secret": "aYvlxyk8g5Y5i4DN55hZPiRQq1E",
+
+    "pk_test":"pk_test_51JSGYHDrIIHnRlXN02dfEZpRpPuwZmH6V11Xg8IZ4FMC6QbXnQ3WqXKpK7bgkXTtnW7zJPxsBkSreQT6XZHUw2pl00haIdWGvU",
+    "sk_test":"sk_test_51JSGYHDrIIHnRlXN7EB8TCpa8tVMTUC92lUvqB3eccF8CvTVPfDFeUvpkOev7rNCRmylkLoTCiKG2en0jSLEP7cu00VovWVdlj"
+    
 }
