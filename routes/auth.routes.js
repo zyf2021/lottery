@@ -33,7 +33,7 @@ router.post('/register',
         check('password','Минимальная длина пароля 6 символов').isLength({min:6})
     ], 
     async (req, res) =>{
-        //try{
+        try{
             const errors = validationResult(req)
             if(!errors.isEmpty()){
                 return res.status(400).json({
@@ -56,7 +56,7 @@ router.post('/register',
             console.log({token})
             //jwt.sign({userId: user.id}, activation_token, {expiresIn: '5m'}) //createActivationToken
             
-            const url = `${baseUrl_3000}/user/activate/${token}`
+            const url = `${baseUrl_3000}/activate/${token}`
 
             sendMail(email, url, "Verify your email address")
             res.json({message: "Register Success! Please activate your email to start."})
@@ -64,9 +64,10 @@ router.post('/register',
             //Сохранение пользователя (в /activate)
             //await user.save()
             //res.status(201).json({message:'Пользователь создан'})
-       /* }catch(e){
-            res.status(500).json({message: "WARN"})
-        } */ 
+        }catch(e){
+            res.status(500).json({message: e.message})
+            
+        }
     }
 )
 // /api/auth/activation

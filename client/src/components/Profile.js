@@ -10,7 +10,8 @@ export const Profile = ({ user }) => {
               <span class="card-title">Профиль</span>  
             <div>  
                 <div className="avatar">
-                   <img //src={avatar ? avatar : user.avatar} alt=""
+                   <img //src={avatar ? avatar : user.avatar}
+                    alt="Аватар"
                    />
                     <span>
                         <i className="fas fa-camera"></i>

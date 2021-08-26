@@ -1,42 +1,50 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react'
-import {useHistory, useParams} from 'react-router-dom'
-import {AuthContext} from '../context/AuthContext'
-import {Loader} from '../components/Loader'
-//import {Profile} from '../components/Profile'
-import { useHttp } from '../hooks/http.hooks'
+import React, {useState, useEffect, useContext} from 'react'
+import {useHttp} from '../hooks/http.hooks'
+import { useMessage } from '../hooks/message.hook'
+import {useParams} from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext'
+//import axios from 'axios'
 
 export const Activate = () => {
-    const {token} = useContext(AuthContext)
-    const {request, loading} = useHttp()
-    const[user, setUser] = useState(null)
-    const userId = useParams().id
-
-    const getUser = useCallback(async() => {
-        try {
-            const fetched = await request(`/api/auth/activation`, 'POST', null, {
-                Authorization: `Bearer ${token}`
-            })
-            setUser(fetched)
-        } catch (e) {
-            
-        }
-    }, [token, userId, request])
-    
+    const auth = useContext(AuthContext)
+    const message = useMessage()
+    const {loading, request, error, clearError} = useHttp()
+    const token = useParams().token
+    const [err, setErr] = useState('') 
+    const [success, setSuccess] = useState('')
 
     useEffect(() => {
-        getUser()
-      }, [getUser])
-    
-      if (loading) {
-        return <Loader />
-      }
+        message(error)
+        clearError()
+      }, [error, message, clearError])
 
-    /*return(   
-            <>
-                { !loading && user && <Profile user={user} /> }
-            </>
-    )*/
+    useEffect(() => {
+        if(token){
+            const activationEmail = async () => {
+                try {
+                    const res = await request('/api/auth/activation','POST', {token})
+                    message(res.message)
+                    //const text = res.message
+                } catch (e) {}
+            }
+            activationEmail()
+        }
+    },[token, request])
+
+    //console.log(useParams().token)
     return(
-        <h1>activated!</h1>
+        <div class="row">
+            <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                <span class="card-title">Активация аккаунта</span>
+                <p>{auth.user}</p>
+                </div>
+                <div class="card-action">
+                <a href = "/">Вход</a>
+                </div>
+            </div>
+            </div>
+        </div>
     )
 }

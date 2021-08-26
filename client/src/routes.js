@@ -29,6 +29,7 @@ export const useRoutes = isAuthenticated => {
                 <Route path = "/all_info" exact>
                     <AllUsersInfoPage />
                 </Route>
+                
                 <Redirect to ="/create"/>
             </Switch>
         )
@@ -40,6 +41,9 @@ export const useRoutes = isAuthenticated => {
             </Route>
             <Route path = "/registration" exact>
                 <RegisPage/>
+            </Route>
+            <Route path = "/activate/:token" exact>
+                    <Activate/>
             </Route>
             <Redirect to ="/"/>        
         </Switch>

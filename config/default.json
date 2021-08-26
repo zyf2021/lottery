@@ -2,17 +2,17 @@
     "port":5000,
     "mongoUri": "mongodb+srv://user:qwerty_12345@cluster0.ksvot.mongodb.net/db_lottery?retryWrites=true&w=majority",
     "jwtSecret":"key practice Zyf",
-    "baseUrl" : "http://192.168.43.176:5000",
+    "baseUrl" : "http://192.168.43.176:5000/",
 
     "baseUrl_3000" : "http://192.168.43.176:3000",
 
     "activation_token" : "activ_token",
-    "access_token":"access_token",
+    "access_token":"ya29.a0ARrdaM_qepnbD0_wLpRmxTmxEymPxPIYV8bzNzRsISGsNYeYpafPhKEfwoU4gVY-u5Cm90MdmDRLTqXsXVWglZ1D8mf170ZZIEzRBGwBk2wyCQl9gHco9gc9BFIjIT_2KLkEba7ext0lN-sRsJi60F_hIZjr",
     "refresh_token": "refresh_token",
 
-    "mailing_service_client_id": "1009485664193-3f6kop6699vvei3c96lfn0u5b40nrneg.apps.googleusercontent.com",
-    "mailing_service_client_secret":"shcyO55Ch_LDv9WOdff4nFwT",
-    "mailing_service_refresh_token":"1//04RBwR26BJ7u6CgYIARAAGAQSNwF-L9Ir_acP3YtsHbHCKZ5zfSj7q227Y-wTZZ8Ehzooe3zRe_Khv6BjdfdzF0vQ-okMWm5dLIE",
+    "mailing_service_client_id": "1009485664193-05v086u1pln0c83de59oa700s7r0i0tf.apps.googleusercontent.com",
+    "mailing_service_client_secret":"ExHP-nA2BD6xMz0XKnc6xJCj",
+    "mailing_service_refresh_token":"1//04xnDuBMczP8cCgYIARAAGAQSNwF-L9IrCMC_VEzhtuX2B0FJcCFmNJ4I_sDplqRSMc2gbz1VS60fac_DhdKwMaUQ9-msHCxC2aQ",
     "sender_email_address":"tynshun@gmail.com",
 
     "cloud_name": "dtk7vdu4s", 

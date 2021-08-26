@@ -46,8 +46,8 @@ const userControllers = {
     
     activateEmail: async (req, res) => {
         try {
-            const {activation_token} = req.body
-            const user = jwt.verify(activation_token, config.get('activation_token'))
+            const {token} = req.body
+            const user = jwt.verify(token, config.get('activation_token'))
 
             console.log({user})
             const {email, first_name, last_name, phone, password, date_create} = user
