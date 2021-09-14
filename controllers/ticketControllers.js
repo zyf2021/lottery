@@ -1,4 +1,5 @@
 const Ticket = require('../models/Ticket')
+const User = require('../models/User')
 const config = require('config')
 //убрать в config
 //('sk_test_51JSGYHDrIIHnRlXN7EB8TCpa8tVMTUC92lUvqB3eccF8CvTVPfDFeUvpkOev7rNCRmylkLoTCiKG2en0jSLEP7cu00VovWVdlj');
@@ -9,7 +10,7 @@ const calculateOrderAmount = items => {
     // Replace this constant with a calculation of the order's amount
     // Calculate the order total on the server to prevent
     // people from directly manipulating the amount on the client
-    return 1400;
+    return 1000;
   };
 
 const ticketControllers = {
@@ -17,9 +18,10 @@ const ticketControllers = {
         try {
             //console.log(req.user.userId)
             const tickets = await Ticket.find({owner:req.user.userId})
-            res.json(tickets)        
+            const user = await User.findById(req.user.userId)
+            res.json({tickets, user})        
         } catch (e) {
-            return res.status(500).json({message:'Ошибка'})
+            return res.status(500).json({message:e.message})
         }
     },
     deleteTicket: async (req, res) => {
@@ -27,19 +29,32 @@ const ticketControllers = {
             await Ticket.findByIdAndDelete(req.params.id)
             res.json({message :'Билет удален'})
         } catch (e) {
-            return res.status(500).json({message:e.message})
+            return res.status(500).json({message:e.message + " deleteTicket"})
         }
     },
     payTicket: async (req, res) => {
+        const idTicket = req.params.id
         const {items} = req.body
-        // Create a PaymentIntent with the order amount and currency
         const paymentIntent = await stripe.paymentIntents.create({
-          amount: calculateOrderAmount(items),
-          currency: "usd"
-        })
+            amount: calculateOrderAmount(items),
+            currency: "usd"
+          })
+        const exist = await Ticket.findOne({_id: idTicket})
+        const now = new Date()
+        if (exist){
+            await Ticket.findOneAndUpdate({_id: exist._id}, {
+                date_pay: now, status: "1" 
+            })
+            //await Ticket.deleteMany({status: 0})
+        }
+        // Create a PaymentIntent with the order amount and currency
+       
         res.send({
           clientSecret: paymentIntent.client_secret
         })
+        //console.log(req.body)
+       // res.json({message:idTicket})
+        
     }
 }
 

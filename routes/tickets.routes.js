@@ -35,7 +35,7 @@ router.post('/create',
 
         await ticket.save()
 
-        res.status(201).json({message: 'Билет создан'})
+        res.status(201).json({message: 'Билет создан ' + ticket._id, idTicket: ticket._id})
         //console.log(req);
 
     } catch (e) {
@@ -44,13 +44,13 @@ router.post('/create',
 })
 
 // /api/tickets/payment
-router.post('/payment', ticketControllers.payTicket)
+router.post('/payment/:id', auth, ticketControllers.payTicket)
 
 ///api/tickets/
 router.get('/', auth, ticketControllers.getUserTicket)
 
 //api/tickets/delete/:id
-router.get('/delete/:id', auth, ticketControllers.deleteTicket)
+router.delete('/delete/:id', auth, ticketControllers.deleteTicket)
 
 
 module.exports = router

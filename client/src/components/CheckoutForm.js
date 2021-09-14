@@ -1,27 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, {useContext, useEffect, useState} from 'react'
 import {
   CardElement,
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
+import { useParams } from "react-router-dom"
+import { AuthContext } from '../context/AuthContext'
 
 export default function CheckoutForm() {
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
+  const id = useParams().id
   const [processing, setProcessing] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [clientSecret, setClientSecret] = useState('');
   const stripe = useStripe();
   const elements = useElements();
+  const auth = useContext(AuthContext)
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     window
-      .fetch("/api/tickets/payment", {
+      .fetch(`/api/tickets/payment/${id}`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+           Authorization: `Bearer ${auth.token}`,
         },
+        
         body: JSON.stringify({items: [{ id: "xl-tshirt" }]})
       })
       .then(res => {

@@ -1,5 +1,15 @@
 @import "~materialize-css/dist/css/materialize.min.css";
 
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1 0 auto;
+}
+    
 /*#root {
     display: flex;
     align-items: center;
@@ -63,7 +73,7 @@
   #card-element {
     border-radius: 4px 4px 0 0;
     padding: 12px;
-    border: 1px solid rgba(50, 50, 93, 0.1);
+    border: 1px solid rgba(12, 12, 131, 0.1);
     max-height: 44px;
     width: 100%;
     background: white;
@@ -76,7 +86,7 @@
   
   /* Buttons and links */
   button {
-    background: #5469d4;
+    background: #253ba7;
     font-family: Arial, sans-serif;
     color: #ffffff;
     border-radius: 0 0 4px 4px;

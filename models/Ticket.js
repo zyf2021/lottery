@@ -9,8 +9,11 @@ const schema = new Schema({
     ticket5:{type:Number, min:0, max:70},
     //ticket1:{type:Number, min:0, max:70}
     //id_user:{},
-    status:{type:Boolean, default: false},//enum - массив допустимых значений
-    owner:{type:Types.ObjectId, ref:'User'}
+    status:{type:Number, default: 0},//0 - создан, 1 - оплачен, 2 - проигран, 3 - выигран
+    owner:{type:Types.ObjectId, ref:'User'},
+    date_pay:{type:Date}
+},{
+    timestamps: true
 })
 
 module.exports = model('Ticket', schema)

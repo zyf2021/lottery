@@ -2,12 +2,6 @@ const cloudinary = require('cloudinary')
 const fs = require('fs')
 const config = require('config')
 
-/*cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.CLOUD_API_KEY,
-    api_secret: process.env.CLOUD_API_SECRET
-})*/
-
 cloudinary.config({ 
     cloud_name: config.cloud_name, 
     api_key: config.api_key, 
@@ -23,8 +17,6 @@ const uploadControllers = {
                 folder: 'avatar', width: 150, height: 150, crop: "fill"
             }, async(err, result) => {
                 if(err) throw err
-
-                //removeTmp(file.tempFilePath)
                 fs.unlink(
                     file.tempFilePath, 
                     (err => {
